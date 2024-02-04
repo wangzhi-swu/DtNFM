@@ -1,7 +1,6 @@
 function       CurPat = Image2Patch( im_out, par )
-
 im_out     =  single(im_out);
-CurPat     =  zeros(par.ps2ch, par.maxrc, 'double');
+CurPat     =  zeros(par.ps2ch, par.maxrc, 'double'); % 3p^2 * All
 k          =  0;
 for channel = 1:par.ch
     for i = 1:par.ps

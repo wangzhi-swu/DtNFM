@@ -3,24 +3,23 @@ function  par  =  SearchNeighborIndex( par )
 % -NeighborIndex is the array of neighbor patch indexes for each keypatch
 % -NumIndex is array of the effective neighbor patch numbers for each keypatch
 % -SelfIndex is the index of keypatches in the total patch index array
-par.maxr  =  par.h - par.ps + 1;      
-par.maxc  =  par.w - par.ps + 1;      
-r         =  1:par.step:par.maxr;     
+par.maxr  =  par.h - par.ps + 1; 
+par.maxc  =  par.w - par.ps + 1; 
+r         =  1:par.step:par.maxr; 
 par.r     =  [r r(end) + 1:par.maxr]; 
 c         =  1:par.step:par.maxc;     
 par.c     =  [c c(end) + 1:par.maxc];
-par.lenr  =  length(par.r);          
-par.lenc  =  length(par.c);           
-par.ps2   =  par.ps^2;                
-par.ps2ch =  par.ps2 * par.ch;        
+par.lenr  =  length(par.r);  
+par.lenc  =  length(par.c);  
+par.ps2   =  par.ps^2;          
+par.ps2ch =  par.ps2 * par.ch;  
 
 % Total number of patches in the test image
-par.maxrc   =  par.maxr * par.maxc;   
-% Total number of key patches being processed 
+par.maxrc   =  par.maxr * par.maxc; 
 par.lenrc   =  par.lenr * par.lenc; 
 % index of each patch in image
 par.Index = (1:par.maxrc);
-par.Index = reshape(par.Index, par.maxr, par.maxc); % 
+par.Index = reshape(par.Index, par.maxr, par.maxc); 
 % preset variables for all the patch indexes in the Searching window
 par.NeighborIndex =   int32(zeros(4 * par.win^2, par.lenrc));
 par.NumIndex      =   int32(zeros(1, par.lenrc));
@@ -28,12 +27,11 @@ par.SelfIndex     =   int32(zeros(1, par.lenrc));
 
 for  i  =  1 : par.lenr
     for  j  =  1 : par.lenc % for each key patch
-        row = par.r(i);  
-        col = par.c(j);  
+        row = par.r(i); 
+        col = par.c(j); 
         off = (col-1) * par.maxr + row; 
-        off1 = (j-1) * par.lenr + i;    
-        
-       % the range indexes of the window for searching the similar patches
+        off1 = (j-1) * par.lenr + i; 
+
         rmin    =   max( row - par.win, 1 );
         rmax    =   min( row + par.win, par.maxr );
         cmin    =   max( col - par.win, 1 );

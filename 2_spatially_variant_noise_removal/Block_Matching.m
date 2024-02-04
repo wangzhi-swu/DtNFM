@@ -1,4 +1,4 @@
-function       NL_mat = Block_Matching( X, par) 
+function       NL_mat = Block_Matching( X, par) % X ~ CurPat[108, 386841]，blk_arr ~ NL_mat
 % record the indexs of patches similar to the seed patch
 NL_mat   =  zeros(par.nlsp, par.lenrc, 'single');
 
