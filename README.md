@@ -2,7 +2,7 @@
 
 Matlab Code for color image denoising:
 
-Reference: Yiwen Shan, Dong Hu, Haoming Ding, Chunming Yang, and Zhi Wang*. A Novel Truncated Norm Regularization Method for Multi-channel Color Image Denoising, 2023, Submitted.
+Reference: Yiwen Shan, Dong Hu, and Zhi Wang*. A Novel Truncated Norm Regularization Method for Multi-channel Color Image Denoising, 2023, Submitted.
 
 This code is written by Yiwen Shan under the guidance of Dr. Zhi Wang, Southwest Universiy, 2023.
 
