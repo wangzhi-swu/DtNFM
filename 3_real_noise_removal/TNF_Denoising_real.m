@@ -23,7 +23,7 @@ for iter = 1 : Par.Iter
             TempSigma_arrCh = Par.lambda * Par.nSig0(c) * Sigma(c, :);%
             Sigma_arrCh((c-1)*Par.ps2+1:c*Par.ps2, :) = repmat(TempSigma_arrCh, [Par.ps2, 1]);
         end
-        SigmaCol = Par.lambda * sqrt(max(0, repmat(Par.Sigma^2, 1, Par.All) - mean((NoiPat - CurPat).^2)));
+        SigmaCol = Par.lambda * sqrt(abs( repmat(Par.Sigma^2, 1, Par.All) - mean((NoiPat - CurPat).^2)));
     else
         for c=1:3
             TempSigma_arrCh = Par.lambda * Sigma(c, :);

@@ -16,7 +16,7 @@ Par.step      =   5;
 Par.Iter      =   12; 
 Par.maxIter   =   10;
 
-for i = [8]
+for i = [1]
 for ALPHA = [2]
     Par.t = 0;                                                                                                                                                                                            
     Par.alpha = ALPHA;

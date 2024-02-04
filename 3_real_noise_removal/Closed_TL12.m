@@ -19,4 +19,3 @@ function [SigmaZ, svp] = Closed_TL12 (SigmaY, lambda, alpha, C, t)
     svp = length(find(z > 0)) + t;
     SigmaZ = SigmaZ(1:svp);
 end
-% plot(SigmaY,SigmaY, 'k*-');hold on; plot(SigmaY(1:svp),SigmaZ(1:svp),'bs--');hold off;

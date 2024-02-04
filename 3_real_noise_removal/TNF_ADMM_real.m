@@ -22,13 +22,12 @@ A = zeros(size(Y));
 iter = 0;
 while iter < Par.maxIter
     iter = iter + 1;
-    
     % update X, fix Z and A
-    X = (Y.*(W.^2*v.^2) + 0.5*rho*Z - 0.5*A) ./ (W.^2*v.^2 + 0.5*rho);
-
+    X = Y + (rho.*(Z-Y) -A) ./ (2.*W.^2 * v.^2 + rho); % equivalent to  X = (Y.*(W.^2*v.^2) + 0.5*rho*Z - 0.5*A) ./ (W.^2*v.^2 + 0.5*rho);
+    
     % update Z, fix X and A
     X_A = X + A/rho;
-	[U, SigmaY, V] = svd(full(X_A), 'econ');
+    [U, SigmaY, V] = svd(full(X_A), 'econ');
     C = c*sqrt(N)*( mNSig^2 ) / rho^2;%
     [SigmaZ , svp] = Closed_TL12(diag(SigmaY), lambda, alpha, C, Par.t);
     Z =  U(:, 1:svp) * diag(SigmaZ) * V(:, 1:svp)';
