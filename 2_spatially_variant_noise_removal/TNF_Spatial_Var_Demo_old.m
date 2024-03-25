@@ -11,14 +11,14 @@ im_num = length(GT_im_dir);
 Sig_Level = [30 35 40];
 for Truncate = [2]  
 for ALPHA = [1.5]
-for LAMBDA = [0.8]
+for LAMBDA = [ 0.8]
 %     lb = -LAMBDA+3.1;
 for RHO = [0.45]
 % if RHO<=0.16; continue; end
 % parameters for denoising
 Par.nSig0     =   Sig_Level; % STD of the noise image
 Par.win       =   20;        % Non-local patch searching window
-Par.Constant  =   1*sqrt(2);   % Constant num for the weight vector
+Par.Constant  =   sqrt(2);   % Constant num for the weight vector
 Par.Innerloop =   2;         % InnerLoop Num of between re-blockmatching
 Par.ps        =   4;         % Patch size, larger values would get better performance, but will be slower
 Par.step      =   3;         % The step between neighbor patches, smaller values would get better performance, but will be slower
@@ -34,7 +34,7 @@ Par.t         =   Truncate;
 Par.PSNR = zeros(Par.Iter, im_num, 'single');
 Par.SSIM = zeros(Par.Iter, im_num, 'single');
 PSNRs = zeros(im_num,1); SSIMs = zeros(im_num,1); Times = zeros([im_num,1]);
-for i = 19
+for i = 1
     Par.alpha = ALPHA;
     Par.image   =   i;
     Par.nlsp    =   70;   % Initial Non-local Similar Patches number
@@ -47,16 +47,16 @@ for i = 19
     m = min(noise_peak(:));
     noise_peak = (noise_peak-m)./(M-m);
     Par.peak = noise_peak; 
-    % add spatially vatiant noise
+    % add the spatially variant noise
 %     Par.nim = zeros([h, w, ch]); % add noise
 %     randn('seed',0);
 %     for c = 1:ch
 %         noise_this_channel = Sig_Level(c).*noise_peak.*randn([h, w]);
 %         Par.nim(:, :, c) = Par.I(:, :, c) + noise_this_channel;
 %     end
+    % for a fair comparison, all the methods read the corrupted observations
     Par.nim = double( imread(fullfile(Noi_image_dir, Noi_im_dir(i).name)) );
     Par.nSig = Sig_Level .* mean( noise_peak(:) ); % 
-    
     fprintf('%s c=%.2f delta=%.2f win=%d N=%d\nlambda=%.2f rho=%.2f alpha=%.2f t=%d\n', GT_im_dir(i).name(6:7), Par.Constant, Par.delta, Par.win, Par.nlsp, Par.lambda, Par.rho, Par.alpha, Par.t);
     PSNR0  =   csnr( Par.nim, Par.I, 0, 0 );
     SSIM0  =   cal_ssim( Par.nim, Par.I, 0, 0 );
